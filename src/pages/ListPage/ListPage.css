@@ -1,12 +1,25 @@
 .list-page {
-    padding: 42px calc(50% - 300px);
+  padding: 42px calc(50% - 300px);
 }
 
 .list-page__title {
-    font-size: 34px;
-    margin-bottom: 26px;
+  font-size: 34px;
+  margin-bottom: 26px;
 }
 
 .list-page ul li {
-    font-size: 18px;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 1024px) {
+  .list-page {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .list-page__title {
+    font-size: 25px;
+  }
+  .list-page ul li {
+    font-size: 15px;
+  }
 }

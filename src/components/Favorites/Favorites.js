@@ -67,7 +67,7 @@ class Favorites extends Component {
                 </button>
                 <a href={`http://localhost:3000/list/${this.state.textLink}`}
                 className={`link__none ${this.state.linkActive ? "link__block" : null}`}
-                target="_blank" rel="noopener noreferrer" >Поделиться с друзьями</a>
+                target="_blank" rel="noopener noreferrer" >Перейти к списку</a>
             </div>
         );
     }

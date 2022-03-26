@@ -19,6 +19,8 @@
 
 .favorites__list--item {
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .favorites__list--title {
@@ -58,5 +60,14 @@
 
 .link__block {
   display: block;
-  color: aqua;
+  color: #0000ee;
+}
+
+@media screen and (max-width: 767px) {
+  .favorites {
+    padding: 10px;
+  }
+  .favorites__name {
+    font-size: 14px;
+  }
 }

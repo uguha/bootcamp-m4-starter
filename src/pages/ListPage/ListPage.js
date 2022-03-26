@@ -4,7 +4,8 @@ import './ListPage.css';
 class ListPage extends Component {
     state = {
         movies: [],
-        title: ''
+        title: '',
+        movieIds: []
     }
     componentDidMount() {
         const apiKey = '5771d268';
@@ -18,6 +19,7 @@ class ListPage extends Component {
             .then(res => res.json())
             .then(data => {
                 this.setState({title: data.title})
+                this.setState({moviesId: data.movies})
                 data.movies.forEach(elem => {
                     fetch(`http://www.omdbapi.com/?i=${elem}&apikey=${apiKey}`)
                         .then(res => res.json())
@@ -33,20 +35,32 @@ class ListPage extends Component {
                 console.log(`Произошла ошибка: ${error.message}`);
             })
     }
-    render() { 
+    render() {
+        const exist =  this.state.moviesId && this.state.moviesId.length > 0;
         return (
-            <div className="list-page">
-                <h1 className="list-page__title">{this.state.title}</h1>
-                <ul>
-                    {this.state.movies.map((item) => {
-                        return (
-                            <li key={item.imdbID}>
-                                <a href={"https://www.imdb.com/title/" + item.imdbID} target="_blank" rel="noopener noreferrer">{item.Title} ({item.Year})</a>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
+            <>
+                <div className="list-page">
+                    <h1 className="list-page__title">{exist ? this.state.title : 'Loading...'}</h1>
+                    {exist ?
+                    <ul>
+                        {this.state.moviesId.map((item) => {
+                            let movie =  this.state.movies.find((s)=>{return s.imdbID == item});
+                            return (
+                                <>
+                                    {movie ?
+                                    <li key={movie.imdbID}>
+                                        <a href={"https://www.imdb.com/title/" + movie.imdbID} target="_blank" rel="noopener noreferrer">{movie.Title} ({movie.Year})</a>
+                                    </li>  :
+                                    <p>Loading...</p>
+                                    }
+                                </>
+                            );
+                        })}
+                    </ul> :
+                    <></>
+                    }
+                </div>
+            </>
         );
     }
 }
